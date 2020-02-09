@@ -1,0 +1,7 @@
+
+
+fstatcheck: fstatcheck.c csapp.o
+				gcc -O2 -pthread -o fstatcheck fstatcheck.c csapp.o
+
+csapp.o: csapp.c
+				gcc -O2 -c csapp.c

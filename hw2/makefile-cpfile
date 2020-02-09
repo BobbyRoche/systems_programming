@@ -1,0 +1,7 @@
+
+
+cpfile: cpfile.c csapp.o
+				gcc -O2 -pthread -o cpfile cpfile.c csapp.o
+
+csapp.o: csapp.c
+				gcc -O2 -c csapp.c

@@ -1,0 +1,6 @@
+
+tee: tee.c csapp.o
+				gcc -O2 -pthread -g -o tee tee.c csapp.o
+
+csapp.o: csapp.c
+				gcc -O2 -c csapp.c

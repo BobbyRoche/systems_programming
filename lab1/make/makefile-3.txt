@@ -1,0 +1,15 @@
+PROG=	test #sets test to PROG variable
+OBJS=	one.o main.o two.o three.o #sets the listed files to OBJS vairable
+
+#CFLAGS=	-Wall -g
+
+all: ${PROG} #make target all with prerequisite test 
+
+#build target in PROG (test) with prerequisites in OBJS
+${PROG}: ${OBJS}
+	@echo $@ depends on $? #prints message to terminal stating target file depends on output from last command
+	${CC} ${LDFLAGS} ${OBJS} -o ${PROG} #compiles with LDFLAGS options with OBJS files, output as test.exe
+
+#clean command
+clean:
+	rm -f ls *.o #removes .o files

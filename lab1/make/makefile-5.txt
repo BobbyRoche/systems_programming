@@ -1,0 +1,19 @@
+PROG=	test #sets test to variable PROG
+OBJS=	one.o main.o two.o three.o #sets listed .o files to OBJS variable
+#CFLAGS=	-Wall -g
+
+#sets target all to use prerequisite test or PROG variable
+all: ${PROG}
+
+#build target test.exe using prerequisites listed in OBJS
+${PROG}: ${OBJS}
+	@echo $@ depends on $? #print target depends on output of last command
+	${CC} ${LDFLAGS} ${OBJS} -o ${PROG} #compile with flags for linker and object files and output to test.exe
+
+#create the.o files using the .c files of the same name as well as rxt.h and one.h
+%.o: %.c ext.h one.h
+	$(CC) -c $(CFLAGS) -o $@ $< #compiles using cflags as compiler arguements outputting to the output file names
+
+#clean command setup
+clean:
+	rm -f ${PROG} ${OBJS} #remove the test.exe and files listed in OBJS

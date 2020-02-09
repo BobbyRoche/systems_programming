@@ -1,0 +1,19 @@
+PROG=	test #sets var PROG to test
+OBJS=	one.o main.o two.o three.o #sets OBJS to the object file
+CFLAGS=	-Wall -g #sets CFLAGS to options
+
+all: ${PROG} #sets target all will build all needed files to prerequisite test as the executable being built
+
+#builds target test using prerequisites set in OBJS listed above
+${PROG}: ${OBJS}
+	@echo $@ depends on $? #prints message to terminal target depends on prerequisites
+	${CC} ${LDFLAGS} ${OBJS} -o ${PROG} #compiles with the LDFLAGS or extra flags to invoke the linker
+													#compiles all objs files creates exe output file in PROG or test.exe
+
+#tranlsates .c files to .o
+.c.o:
+	$(CC) -c $(CFLAGS) -o $@ $< #compiles with CFLAGS options and outputs .o files
+
+#sets up clean command
+clean:
+	rm -f ${PROG} ${OBJS} #remove test.exe and files named in OBJS

@@ -1,0 +1,34 @@
+# Run 'make', then 'touch one.h' and 'make' again.
+
+#sets compiler 'cc' equal to the variable CC
+CC=cc
+
+#all implies that make should build all the necessary files to complete the build
+#going to make one.exe
+all: one
+
+#build target file one, using input files (prerequisites one.o main.o two.o three.o)
+one: one.o main.o two.o three.o
+	${CC} one.o main.o two.o three.o -o one #recipe, compile the .o files listed as one.exe
+
+#make/build targetfile one.o using input files (prerequisites ext.h one.h one.c)
+one.o: ext.h one.h one.c
+	${CC} -c one.c #compile one.c -c prevents linking with ld(1) produces a .o file for the c file
+
+#make/build target file main.o using input files (prerequisites ext.h one.h main.c)
+main.o: ext.h one.h main.c
+	${CC} -c main.c #compile main.c -c prevents linking with ld(1) produces a .o file for the c file
+
+#make/build target file two.o using input files (prerequisites one.h two.c)
+two.o: one.h two.c
+	${CC} -c two.c #compile two.c -c prevents linking with ld(1) produces a .o file for the c file 
+
+#make/build target file three.o using input files (prerequisites one.h three.c)
+three.o: one.h three.c
+	${CC} -c three.c #compile three.c -c prevents linking with ld(1) produces a .o file for the c file
+
+#command to delete one and the .o files
+clean:
+	rm -f one *.o 
+#rm command removes specified files (in this case one.exe and files ending with .o) -f ignores non-existant and
+#does not make user authorize removal of each file

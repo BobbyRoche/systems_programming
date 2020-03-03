@@ -1,0 +1,35 @@
+Robert Roche
+
+Lab3
+
+client.c:
+
+I began with the code given to us from the ICE done a few weeks ago. 
+I checked for the proper amount of arguments, if they were not given, I exit with a message showing
+what they should be. I then make sure we can get the host by name, then the clientfd opens the 
+socket. The client then connects to the socket, and sends the header, or request over to the server.
+The server should either send back the contents, or an error message if the wrong filename was given.
+I read the contents by doing the header first, then I use a different buffer to print the body.
+
+
+server.c:
+
+I began with the echoserver given in class. I check for the proper arguments and do the same
+as client if they're not given. The code from class then opens a listener at the port given.
+I begin constructing the path to the correct file by starting at the root directory. I find this
+to be a bit safer just in case. We then continuously take requests until the user kills the server.
+The server should construct the path and spit the file contents back to the client. If the file does
+not exist we return the 404 File not found error. The code also makes sure we are recieving a GET
+request, if we are not it does nothing. It then parses the request to construct the proper path.
+
+
+Things to note:
+
+-run make, then ./server <port> on one tux window, and ./client <URL><port><file> on another
+
+-The filename argument does not need a '/' before it. Just type the plain file name.
+
+-The only potential issue in my code that I can tell is with my header reading in client. I could
+not get it to work on taking '\r\n' to indicate the end of a header, so after the content length is
+read, we skip to the body and begin there. In the files I tested it worked fine.
+

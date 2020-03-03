@@ -1,0 +1,8 @@
+Robert Roche
+
+8.23:
+It cannot always be guarunteed that signals will always be recieved. Sometimes if the parent recieves multiple signals at one time
+it may block signals and cause them to become pending signals. This would cause the rest of the signals to never be handled since they are
+never recieved. It may also be caused by sleep. My understanding of sleep is that when it is called within a signal handler it may cause some strange
+behavior. In short, the bug must be caused by the parent blocking some of the signals sent to it by the child process.
+

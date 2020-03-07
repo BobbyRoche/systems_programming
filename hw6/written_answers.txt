@@ -1,0 +1,33 @@
+Robert Roche 
+
+
+
+Q12.16:
+
+This question asked us to make n reapable, joinable threads from a command line argument n. I did this by creating an 
+integer n which was set to cmd line arg, if no arg is given it defaults to n=1 as it was before I added to the code. 
+After this I created a list of n threads. Then we run a for loop that iterates n times and creates and joins each thread. 
+The threads terminate and the program exits.
+
+
+Q12.17
+A: 
+The problem is the original thread is terminating while the peer thread is sleeping so the peer thread never reaches the print 
+statement. The origninal thread terminating results in the peer thread(s) terminating before they can come out of the sleep function.
+
+
+B:
+Pthread_join would fix this bug. Pthread_join forces the original thread to wait for the peer thread to terminate before continuing.
+Also, pthread_exit() will allow the child thread to finish printing before terminating. From the research I have done, I believe this is
+because exit() terminated the entire process/application, where pthread_exit only terminates the calling thread, leaving other threads
+untouched.
+
+
+Final Question:
+The final problem asked us to use threads to print a string. I began by creating a struct to host the variables I needed to pass as
+arguements to the thread routine. The struct contained an int sum, char *msg, and int taskid. I initialized the struct in main, then set
+the variables in the struct in the for loop. Each iteration the task id increases by 1, the msg changes to the proper message in the char
+array, and the taskid is set to the loop variable. In the for loop we create a thread each time and cast the struct to a void. In the 
+thread routine I then cast the arg back to the struct and store it in a local struct. I set the variables already declared in the function
+to the variables in the struct and then the print statements did the rest. After the create statement in main I placed a join that way
+main waits for each thread to terminated before creating the next, otherwise the print statements would be in a mixed up order.
